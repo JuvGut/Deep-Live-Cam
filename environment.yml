@@ -1,0 +1,44 @@
+name: deeplive  # Keep the environment name (though we won't create it)
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10  # You already have this in your environment
+
+  # --- Essential Dependencies (Keep These) ---
+  - numpy>=1.23.5,<2
+  - typing-extensions>=4.8.0
+  - opencv  # Use conda-forge version; it's generally better managed
+  - psutil=5.9.8
+  - pillow>=11.1.0,<12 # Constrain to avoid potential breaking changes with a major version update
+  - protobuf=4.23.2
+  - tqdm=4.66.4
+  - tk  # Needed for customtkinter and tkinterdnd2
+    
+  - pip #we will install the pip dependencies
+  - pip:
+    - cv2_enumerate_cameras==1.1.15  # Keep; camera enumeration
+    - customtkinter==5.2.2      # Keep, GUI library
+    - pygrabber==0.2 # seems to be used for capture device interaction
+
+  # --- Conditional Dependencies (Simplified for M1 Mac) ---
+  - pytorch::pytorch=2.5.1 # no cuda, always cpu on mac
+  - pytorch::torchvision=0.20.1 #same, cpu for mac
+  - onnxruntime-silicon=1.16.3  # For Apple Silicon, explicitly use this
+   #- tensorflow=2.12.1 #Not on requirements.txt
+  - onnx=1.16.0
+
+  # --- Dependencies you *might* be able to remove (but test carefully) ---
+  #   Comment these out one by one, testing after each removal.
+  #   If deep-live-cam breaks, uncomment the dependency and try again.
+  # - insightface==0.7.3  # Face detection/recognition.  Might be core.
+  # - gfpgan==1.3.8       # Face restoration. Might be core.
+  # - opennsfw2==0.10.2   # NSFW detection.  Keep if you need this feature.
+  # - tkinterdnd2==0.4.2  # Drag and drop for Tkinter. Keep if the UI uses it.
+
+  # --- Dependencies you can DEFINITELY remove ---
+  # - torch==2.5.1+cu121  # Removed: Redundant and CUDA-specific (no CUDA on Mac)
+  # - torchvision==0.20.1+cu121  # Removed: Redundant and CUDA-specific
+  # - onnxruntime-gpu==1.16.3  # Removed: GPU version (not needed on M1 Mac)
+  # - --extra-index-url https://download.pytorch.org/whl/cu121   # Removed, not needed.

@@ -1,0 +1,24 @@
+# --- Conda-Installable Packages (Prioritize these) ---
+conda install -c conda-forge numpy=1.23.5 typing-extensions=4.8.0 psutil=5.9.8 pillow=11.1.0 protobuf=4.23.2 tqdm=4.66.4 tk -y
+
+# --- PyTorch (Special Handling) ---
+#   We'll use the PyTorch-provided installation command for best compatibility.
+conda install pytorch==2.5.1 torchvision==0.20.1 -c pytorch -y
+
+# --- OpenCV (try conda-forge first)
+conda install -c conda-forge opencv=4.10.0.84 -y
+
+# --- ONNX (and onnxruntime-silicon) ---
+conda install -c conda-forge onnx=1.16.0 -y
+
+# if this fails, pip install
+pip install onnxruntime-silicon==1.16.3
+
+# --- Remaining Packages (Likely `pip` only) ---
+pip install cv2_enumerate_cameras==1.1.15
+pip install customtkinter==5.2.2
+pip install insightface==0.7.3
+pip install opennsfw2==0.10.2
+pip install gfpgan==1.3.8
+pip install tkinterdnd2==0.4.2
+pip install pygrabber==0.2
